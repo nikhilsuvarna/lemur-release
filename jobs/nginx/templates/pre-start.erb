@@ -1,0 +1,13 @@
+#!/bin/bash -ex
+apt-get update
+apt-get install -y libpcre3-dev
+
+NGINX_DIR=/var/vcap/store/nginx
+if [ ! -d $NGINX_DIR ]; then
+   mkdir -p $NGINX_DIR
+   # cd $(basename $NGINX_DIR)
+ #  curl -L https://github.com/cunnie/sslip.io/archive/v1.tar.gz |
+ #  tar xzf -
+ #  mv sslip.io-1 $NGINX_DIR
+  chown -R vcap:vcap $NGINX_DIR
+fi

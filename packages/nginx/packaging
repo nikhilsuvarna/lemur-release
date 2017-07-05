@@ -1,0 +1,28 @@
+set -e
+
+apt-get install -y nodejs-legacy python-pip python-dev python3-dev libpq-dev npm libpcre3-dev
+echo "Extracting nginx..."
+tar xzvf nginx/nginx-1.11.7.tar.gz
+
+echo "Building nginx..."
+
+pushd nginx-1.11.7
+  ./configure \
+    --with-ipv6 \
+    --with-debug \
+    --prefix=${BOSH_INSTALL_TARGET} \
+    --with-pcre \
+    --with-http_ssl_module \
+    --with-http_dav_module \
+    --with-http_realip_module \
+    --with-http_gunzip_module \
+    --with-http_v2_module \
+    --with-stream \
+    --with-threads \
+    --with-stream_ssl_module \
+    --with-http_slice_module
+
+  make
+  make install
+popd
+

@@ -1,0 +1,22 @@
+#!/bin/bash 
+set -eu
+LEMUR_ROOT=/var/vcap/store/nginx/www
+sleep 60
+apt-get -y install python-pip python-dev python3-dev libpq-dev libffi-dev git
+
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+apt-get install -y nodejs
+
+pip install https://api.github.com/repos/allan-simon/virtualenv/tarball/patch-1
+echo "Git Cloning lemur..."
+
+if [[ ! -d $LEMUR_ROOT/lemur ]]; then
+git clone https://github.com/Netflix/lemur $LEMUR_ROOT
+fi
+echo "Building lemur..."
+/usr/local/bin/virtualenv -p python3 $LEMUR_ROOT
+source $LEMUR_ROOT/bin/activate
+
+pushd $LEMUR_ROOT
+make release
+popd

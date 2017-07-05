@@ -1,0 +1,5 @@
+check process lemur
+  with pidfile /var/vcap/sys/run/lemur/lemur.pid
+  start program "/var/vcap/jobs/lemur/bin/lemur_ctl start"
+  stop program "/var/vcap/jobs/lemur/bin/lemur_ctl stop"
+  group vcap

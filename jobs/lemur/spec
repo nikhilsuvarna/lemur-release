@@ -1,0 +1,35 @@
+---
+name: lemur
+
+templates: 
+  lemur_ctl.sh: bin/lemur_ctl
+  lemur.conf.py.erb: etc/lemur.conf.py
+  pre-start.erb: bin/pre-start
+
+packages:
+- pid_utils
+
+consumes:
+- name: db
+  type: postgres
+
+
+properties:
+  bind_ip:  
+    description: blah
+  bind_port:  
+    description: blah
+  postgresql_database:
+    description: blah
+  postgresql.host:
+    description: blah
+  postgresql.port:
+    description: blah
+  postgresql.address:
+    description: blah
+  postgresql.database:
+    description: blah
+  postgresql.role.name:
+    description: blah
+  postgresql.role.password:
+    description: blah
